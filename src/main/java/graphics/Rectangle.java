@@ -1,11 +1,13 @@
 package graphics;
 
+import java.util.Objects;
+
 public class Rectangle extends Shape {
     private int width;
     private int height;
 
     public Rectangle() {
-        this(0,0);
+        this(0, 0);
     }
 
     public Rectangle(int width, int height) {
@@ -61,5 +63,32 @@ public class Rectangle extends Shape {
     @Override
     public double getPerimeter() {
         return 2 * (width + height);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Rectangle rectangle = (Rectangle) o;
+        return super.equals(o) &&
+                width == rectangle.width &&
+                height == rectangle.height;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), width, height);
+    }
+
+    @Override
+    public void draw() {
+        System.out.println(this);
+    }
+
+    @Override
+    public void scale(int factor) {
+        height = (height * factor) / 100;
+        width = (width * factor) / 100;
     }
 }

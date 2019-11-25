@@ -1,6 +1,8 @@
 package graphics;
 
-public abstract class Shape {
+import java.util.Objects;
+
+public abstract class Shape implements Drawable {
     private int x;
     private int y;
 
@@ -32,6 +34,20 @@ public abstract class Shape {
     public void setPosition(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Shape shape = (Shape) o;
+        return x == shape.x &&
+                y == shape.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 
     public abstract double getArea();
